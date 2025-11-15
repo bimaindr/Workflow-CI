@@ -11,42 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Setup Python
-      - name: Set up Python 3.11.2
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11.2"
 
-      # Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install mlflow scikit-learn pandas numpy
 
-      # Pastikan dataset ada
-      # (jika dataset ada di repo, langkah ini aman)
-      - name: Check dataset exists
+      - name: Check dataset file
         run: |
           if [ ! -f "CAR DETAILS FROM CAR DEKHO_preprocessed.csv" ]; then
             echo "Dataset not found!"
             exit 1
-          else
-            echo "Dataset found ✔"
           fi
 
-      # Run training script
       - name: Run ML training
-        run: |
-          python main.py
+        run: python modelling.py
 
-      # Upload MLflow artifacts (opsional)
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload MLflow artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: mlflow-artifacts
           path: mlruns/
