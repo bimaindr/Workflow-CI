@@ -14,7 +14,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def load_preprocessed_data(filepath):
+def load_preprocessing_data(filepath):
     df = pd.read_csv(filepath)
     
     # Encode target
@@ -93,8 +93,8 @@ def main():
     """Fungsi utama untuk menjalankan training"""
 
     # Load preprocessed data
-    filepath = "CAR DETAILS FROM CAR DEKHO_preprocessed.csv"
-    X, y = load_preprocessed_data(filepath)
+    filepath = "CAR DETAILS FROM CAR DEKHO_preprocessing.csv"
+    X, y = load_preprocessing_data(filepath)
     print(f"Data loaded: {X.shape[0]} rows, {X.shape[1]} features\n")
     
     # Split data
@@ -125,3 +125,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
