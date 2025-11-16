@@ -1,42 +1,45 @@
-name: Train ML Models with MLflow
+name: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+env:
+  CSV_URL: "MLproject/CAR DETAILS FROM CAR DEKHO_preprocessing.csv"
 
 jobs:
-  train:
+  build:
     runs-on: ubuntu-latest
-
+ 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # Checks-out your repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+# Setup Python 3.12.7
+      - name: Set up Python 3.11.2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.11.2"
 
+# Check Env Variables
+      - name: Check Env
+        run: |
+          echo $CSV_URL
+ 
+      # Install mlflow
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install mlflow scikit-learn pandas numpy
-
-      - name: Check dataset file
+          pip install mlflow
+      
+      # Run as a mlflow project
+      - name: Run mlflow project
         run: |
-          if [ ! -f "CAR DETAILS FROM CAR DEKHO_preprocessed.csv" ]; then
-            echo "Dataset not found!"
-            exit 1
-          fi
+          mlflow run MLproject --env-manager=local 
 
-      - name: Run ML training
-        run: python modelling.py
 
-      - name: Upload MLflow artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: mlflow-artifacts
-          path: mlruns/
+
+
