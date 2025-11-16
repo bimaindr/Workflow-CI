@@ -38,8 +38,8 @@ jobs:
       # Run as a mlflow project
       - name: Run mlflow project
         run: |
-          mlflow run MLproject --env-manager=local 
-
-
+          mlflow run MLproject \
+          -P data_path=$CSV_URL \
+      --env-manager=local
 
 
