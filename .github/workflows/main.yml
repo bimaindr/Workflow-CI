@@ -40,6 +40,6 @@ jobs:
         run: |
           mlflow run MLproject \
           -P data_path=$CSV_URL \
-      --env-manager=local
+          --env-manager=local
 
 
