@@ -1,5 +1,6 @@
 entry_points:
   main:
     parameters:
-      data_path: {type: str, default: "MLproject/CAR DETAILS FROM CAR DEKHO_preprocessed.csv"}
+      data_path: {type: str, default: "MLproject/CAR DETAILS FROM CAR DEKHO_preprocessing.csv"}
     command: "python modelling.py --data_path {data_path}"
+
