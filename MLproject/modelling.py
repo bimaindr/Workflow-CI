@@ -94,17 +94,6 @@ def train_models_with_autolog(X_train, X_test, y_train, y_test):
 
 def main():
     """Fungsi utama untuk menjalankan training"""
-    
-    # Set MLflow tracking URI
-    mlflow.set_tracking_uri("http://127.0.0.1:5000/")
-    
-    # Create a new MLflow Experiment
-    mlflow.set_experiment("Submission")
-    
-    print("Starting model training with MLflow...")
-    print(f"Tracking URI: {mlflow.get_tracking_uri()}")
-    print(f"Experiment: {mlflow.get_experiment_by_name('Submission').name}\n")
-    
     # Load preprocessed data
     filepath = "CAR DETAILS_FROM_CAR_DEKHO_preprocessing.csv"
     X, y = load_preprocessed_data(filepath)
@@ -133,8 +122,8 @@ def main():
     print("="*60)
     
     print("\n✓ Training completed!")
-    print("✓ Open MLflow UI at: http://127.0.0.1:5000")
 
 
 if __name__ == "__main__":
+
     main()
